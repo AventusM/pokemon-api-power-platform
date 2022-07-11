@@ -4,9 +4,9 @@ import express from 'express';
 const P = new Pokedex();
 const app = express();
 
-app.get('/pokemon/:id', async (req, res) => {
+app.get('/pokemon', async (req, res) => {
   try {
-    const pokemonId = req.params.id;
+    const pokemonId = req.query.id;
     // Any function with the designation "ByName" can also be passed an integer ID.
     const pokemonData = await P.getPokemonByName(Number(pokemonId));
     res.send({
@@ -22,7 +22,7 @@ app.get('*', (_req, res) => {
   res.send({ message: 'Unknown endpoint. Only "/pokemon/:id" is a supported endpoint' });
 });
 
-const PORT = 3001
-app.listen((process.env.PORT || 5000), () => {
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => {
   console.info(`Server running on port ${PORT}`);
 });
