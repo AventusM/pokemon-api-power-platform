@@ -12,6 +12,8 @@ app.get('/pokemon', async (req, res) => {
     res.send({
       name: pokemonData.name[0].toUpperCase() + pokemonData.name.slice(1),
       sprite: Math.random() < 0.2 ? pokemonData.sprites.front_shiny : pokemonData.sprites.front_default,
+      pokedexEntry: pokemonData.id,
+      mainType: pokemonData.types[0].type.name // Main type
     });
   } catch (e) {
     console.error('error', e);
