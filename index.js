@@ -22,7 +22,7 @@ app.get('*', (_req, res) => {
   res.send({ message: 'Unknown endpoint. Only "/pokemon/:id" is a supported endpoint' });
 });
 
-const PORT = 3001;
-app.listen(PORT, () => {
+const PORT = 3001
+app.listen((process.env.PORT || 5000), () => {
   console.info(`Server running on port ${PORT}`);
 });
