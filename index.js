@@ -1,8 +1,13 @@
 import Pokedex from 'pokedex-promise-v2';
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const P = new Pokedex();
 const app = express();
+const publicPath = path.join(__dirname, 'public');
 
 app.get('/pokemon', async (req, res) => {
   try {
@@ -20,8 +25,25 @@ app.get('/pokemon', async (req, res) => {
   }
 });
 
+app.get("/pokeball", async(req, res) => {
+  try{
+    const pokeBallName = req.query.name
+    const pokeBallData = await P.getItemByName(pokeBallName)
+    console.log(pokeBallData)
+  
+    res.send(pokeBallData)
+  } catch (e){
+    console.error('error', e)
+  }
+})
+
+app.get('/', async (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
+});
+
+app.use(express.static(publicPath))
 app.get('*', (_req, res) => {
-  res.send({ message: 'Unknown endpoint. Only "/pokemon/:id" is a supported endpoint' });
+  res.send({ message: 'Unknown endpoint.' });
 });
 
 const PORT = process.env.PORT || 3001
