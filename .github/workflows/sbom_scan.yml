@@ -1,4 +1,4 @@
-name: Scan an SBOM
+name: Scan an SBOM (package-lock.json)
 
 on:
   push:

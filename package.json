@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/AventusM/pokemon-api-power-platform#readme",
   "dependencies": {
-    "express": "^4.18.1",
+    "express": "^4.0.0",
     "nodemon": "^2.0.19",
     "pokedex-promise-v2": "^4.0.0"
   },
